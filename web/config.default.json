@@ -1,0 +1,315 @@
+{
+  "model": "./assets/Vita.vrm",
+  "hairTint": [
+    0.8,
+    0.9,
+    1
+  ],
+  "hairAccent": [
+    0.36,
+    0.62,
+    1
+  ],
+  "hideMeshes": [
+    "Hair001baked_52",
+    "Hair001baked_64",
+    "Hair001baked_51",
+    "Hair001baked_56",
+    "Bodybaked_4"
+  ],
+  "ears": {
+    "outer": [
+      0.42,
+      0.64,
+      1
+    ],
+    "inner": [
+      1,
+      0.84,
+      0.92
+    ],
+    "tuft": [
+      1,
+      0.98,
+      1
+    ],
+    "size": 1.3,
+    "offset": [
+      0.07,
+      0.17,
+      -0.02
+    ],
+    "tilt": [
+      -0.12,
+      0.25,
+      -0.32
+    ],
+    "enabled": true
+  },
+  "tail": {
+    "enabled": true,
+    "length": 0.85,
+    "radius": 0.052,
+    "furLen": 0.045,
+    "offset": [0, 0, 0]
+  },
+  "cameraFov": 26,
+  "cameraDistance": 1.25,
+  "cameraDistanceMin": 0.8,
+  "maskCell": 4,
+  "maskIntervalMs": 150,
+  "bellVolume": 0.6,
+  "bellThreshold": 3.5,
+  "kimono": {
+    "enabled": true,
+    "bodyMesh": "Bodybaked",
+    "hideMeshes": [
+      "Bodybaked_4"
+    ],
+    "hemAboveFoot": 0,
+    "slitW": 0.102,
+    "top": [
+      0,
+      0,
+      0
+    ],
+    "hem": [
+      0.008,
+      0.012,
+      0.08
+    ],
+    "wave": [
+      0,
+      1,
+      0.965
+    ],
+    "collar": [
+      0.01,
+      0.015,
+      0.09
+    ],
+    "gold": [
+      0,
+      0.855,
+      1
+    ],
+    "eri": [
+      0,
+      0.855,
+      1
+    ],
+    "juban": [
+      0,
+      0,
+      0
+    ],
+    "obi": [
+      0.178,
+      0,
+      0
+    ],
+    "cord": [
+      0,
+      0,
+      0
+    ],
+    "petal": [
+      1,
+      0,
+      0.109
+    ],
+    "petalDeep": [
+      0,
+      0,
+      0
+    ],
+    "sleeveBell": 0.012,
+    "flare": 2.5,
+    "thickness": 0.016,
+    "obiH": 0.044,
+    "neckline": -0.06,
+    "innerShift": -0.05,
+    "waves": 1.05,
+    "sakura": 2,
+    "closure": "zip",
+    "open": 1,
+    "gap": 0.02,
+    "innerShirt": false,
+    "zip": [
+      0,
+      0.665,
+      1
+    ]
+  },
+  "cameraStart": "full",
+  "bust": {
+    "scale": [
+      1.6,
+      1.33,
+      1.5
+    ],
+    "shift": [
+      0.007,
+      0.004,
+      0
+    ]
+  },
+  "body": {
+    "height": 0.95,
+    "butt": 1.45
+  },
+  "outfit": {
+    "gain": {
+      "F00_002_01_Shoes_01_CLOTH": 3
+    },
+    "tint": {
+      "F00_002_01_Shoes_01_CLOTH": [
+        0.03,
+        0.004,
+        0.004
+      ]
+    },
+    "fit": {}
+  },
+  "bodyPaint": {
+    "suit": [
+      0,
+      0,
+      0
+    ],
+    "gloves": [
+      0,
+      0,
+      0
+    ],
+    "stockings": [
+      0,
+      0,
+      0
+    ]
+  },
+  "wardrobe": {
+    "custom": {
+      "cyberkitty": {
+        "base": "cyber",
+        "title": "Кибер-Кошка",
+        "look": "Неоновый кибер-прикид с кислотно-розовыми легинсами и лаковыми сапогами",
+        "shoes": {
+          "style": "knee",
+          "color": "#111111",
+          "accent": "#00ffff"
+        },
+        "colors": {
+          "top": "#00ffff",
+          "jacket": "#111111",
+          "legs": "#ff0077"
+        }
+      },
+      "pajama": {
+        "base": "pajama",
+        "title": "Пижамка",
+        "look": "Уютная домашняя пижамка: нежно-сиреневый мягкий кардиган с рюшечками и пуговичками, прямые пушистые штанишки, тапочки-лапки",
+        "shoes": {
+          "style": "slippers",
+          "color": "#e0d4f8",
+          "accent": "#c4aee8"
+        },
+        "colors": {}
+      },
+      "realpajama": {
+        "base": "cyber",
+        "title": "Уютная пижамка",
+        "look": "Нежно-розовая уютная домашняя пижамка с мягким топом и домашними штанами",
+        "shoes": {
+          "style": "native",
+          "color": "#ffffff"
+        },
+        "colors": {
+          "top": "#fadadd",
+          "jacket": "#fff0f5",
+          "legs": "#fadadd"
+        }
+      }
+    },
+    "shoes": {
+      "cyber": {
+        "style": "ankle",
+        "color": "#fadadd",
+        "accent": "#ffe8ec"
+      },
+      "native": {
+        "style": "knee",
+        "color": "#0a1628",
+        "accent": "#00e5ff"
+      }
+    }
+  },
+  "craft": {
+    "items": {
+      "наушники": {
+        "title": "Кибер-наушники",
+        "attach": "head",
+        "parts": [
+          {
+            "rot": [
+              -15,
+              0,
+              0
+            ],
+            "tube": 0.011,
+            "shape": "torus",
+            "r": 0.145,
+            "color": "#1a1a22",
+            "pos": [
+              0,
+              0,
+              0
+            ],
+            "arc": 180
+          },
+          {
+            "r": 0.045,
+            "pos": [
+              0.145,
+              0,
+              0
+            ],
+            "mirror": "x",
+            "rot": [
+              0,
+              0,
+              90
+            ],
+            "color": "#1a1a22",
+            "h": 0.035,
+            "shape": "cylinder"
+          },
+          {
+            "rIn": 0.022,
+            "material": "glow",
+            "shape": "ring",
+            "pos": [
+              0.164,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              90,
+              0
+            ],
+            "color": "#38e8ff",
+            "mirror": "x",
+            "r": 0.034
+          }
+        ],
+        "worn": false,
+        "at": [
+          0,
+          0.04,
+          -0.015
+        ]
+      }
+    }
+  }
+}

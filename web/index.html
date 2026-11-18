@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Клава</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bubble-bg: rgba(255, 255, 255, 0.94);
+      --bubble-fg: #2b2440;
+      --bubble-edge: rgba(120, 150, 255, 0.55);
+      --state-bg: rgba(30, 26, 48, 0.82);
+      --state-fg: #f4f1ff;
+    }
+    html, body {
+      margin: 0; height: 100%; overflow: hidden;
+      background: transparent; user-select: none;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    canvas { display: block; position: fixed; inset: 0; }
+    #bubble {
+      position: fixed; left: 50%; top: 10px; transform: translateX(-50%);
+      width: max-content; max-width: 88vw; box-sizing: border-box; padding: 10px 14px; border-radius: 16px;
+      background: var(--bubble-bg); color: var(--bubble-fg);
+      border: 2px solid var(--bubble-edge);
+      font-size: 15px; line-height: 1.35; text-align: center;
+      box-shadow: 0 4px 18px rgba(40, 30, 90, 0.25);
+      opacity: 0; transition: opacity 0.25s ease; pointer-events: none;
+      white-space: pre-wrap; overflow-wrap: anywhere;
+    }
+    #bubble.show { opacity: 1; }
+    /* над головой места нет — внизу окна, поверх ног: мельче и не выше трети окна */
+    #bubble.low { font-size: 13px; line-height: 1.3; padding: 7px 11px; max-width: 96vw; max-height: 34vh; overflow: hidden; }
+    /* «думаю… / слушаю…» — облачко над макушкой: left/top ставит klava.js каждый кадр по проекции головы */
+    #state {
+      position: fixed; left: 50%; top: 10px; transform: translateX(-50%); padding: 4px 10px;
+      border-radius: 12px; background: var(--state-bg); color: var(--state-fg);
+      border: 1px solid rgba(56, 232, 255, 0.45); box-shadow: 0 0 10px rgba(56, 232, 255, 0.25);
+      font-size: 13px; white-space: nowrap; opacity: 0; transition: opacity 0.2s ease; pointer-events: none;
+    }
+    /* хвостик облачка к голове */
+    #state::after {
+      content: ''; position: absolute; left: 50%; bottom: -5px; width: 8px; height: 8px; margin-left: -4px;
+      background: var(--state-bg); border-right: 1px solid rgba(56, 232, 255, 0.45); border-bottom: 1px solid rgba(56, 232, 255, 0.45);
+      transform: rotate(45deg);
+    }
+    #state.show { opacity: 1; }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./node_modules/three/build/three.module.js",
+        "three/addons/": "./node_modules/three/examples/jsm/",
+        "@pixiv/three-vrm": "./node_modules/@pixiv/three-vrm/lib/three-vrm.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="bubble"></div>
+  <div id="state"></div>
+  <script type="module" src="./klava.js?v=20261001"></script>
+</body>
+</html>
