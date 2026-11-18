@@ -1,0 +1,88 @@
+{
+ "base": "Qwen3-TTS-12Hz-1.7B-Base-ru-stress",
+ "rank": 16,
+ "alpha": 32,
+ "targets": [
+  "q_proj",
+  "k_proj",
+  "v_proj",
+  "o_proj",
+  "gate_proj",
+  "up_proj",
+  "down_proj"
+ ],
+ "epoch": 2,
+ "val": {
+  "sad": 1.426,
+  "happy": 1.33,
+  "calm": 1.385,
+  "surprised": 1.319,
+  "scared": 1.57,
+  "laugh": 1.158,
+  "sly": 1.159,
+  "annoyed": 1.387,
+  "laughtalk": 1.304,
+  "angry": 1.414,
+  "whisper": 1.251
+ },
+ "before": {
+  "sad": 1.71,
+  "happy": 1.681,
+  "calm": 1.736,
+  "surprised": 1.749,
+  "scared": 1.784,
+  "laugh": 1.498,
+  "sly": 1.374,
+  "annoyed": 1.816,
+  "laughtalk": 1.44,
+  "angry": 1.774,
+  "whisper": 1.459
+ },
+ "prefix": "talker.",
+ "styles": [
+  [
+   "angry",
+   "Furious and angry, shouting loudly, tense aggressive voice, yelling at someone."
+  ],
+  [
+   "annoyed",
+   "Irritated and grumpy, grumbling, annoyed sighs, clipped sharp words, low pitch."
+  ],
+  [
+   "calm",
+   ""
+  ],
+  [
+   "happy",
+   "Happy and excited, warm energetic voice with a smile, lively intonation, natural medium pitch, not high-pitched."
+  ],
+  [
+   "laugh",
+   "Amused and cheerful, smiling voice with a light soft chuckle, clear words, natural medium-low pitch."
+  ],
+  [
+   "laughtalk",
+   "Amused and cheerful, laughing naturally while talking where it is funny, clear words, natural medium-low pitch."
+  ],
+  [
+   "sad",
+   "Sad and quiet, slow soft voice, a little shaky, clear words, natural medium-low pitch."
+  ],
+  [
+   "scared",
+   "Scared and anxious, trembling tense voice, nervous quick breaths."
+  ],
+  [
+   "sly",
+   "Teasing and playful, smirking, mischievous tone, clear words, natural relaxed medium pitch."
+  ],
+  [
+   "surprised",
+   "Very surprised and shocked, gasping, amazed exclamations, same natural pitch."
+  ],
+  [
+   "whisper",
+   "Soft breathy half-whisper, secretive and intimate, but every word clearly audible."
+  ]
+ ]
+}
