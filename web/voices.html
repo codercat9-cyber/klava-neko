@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Голос Клавы</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #faf8ff; --fg: #221d33; --muted: #6d6585; --card: #ffffff; --edge: #e2dcf5; --accent: #5b7cff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #16131f; --fg: #eeeaf8; --muted: #a59fbc; --card: #211d2e; --edge: #353049; --accent: #8aa2ff; }
+    }
+    body { margin: 0; padding: 20px 16px; background: var(--bg); color: var(--fg); font: 15px/1.45 "Segoe UI", system-ui, sans-serif; }
+    main { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 22px; margin: 0 0 4px; }
+    .phrase { color: var(--muted); margin: 0 0 18px; }
+    .card { background: var(--card); border: 1px solid var(--edge); border-radius: 12px; padding: 12px 14px; margin: 0 0 12px; }
+    .head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-weight: 600; }
+    .meta { color: var(--muted); font-weight: 400; font-size: 13px; }
+    .desc { color: var(--muted); font-size: 13px; margin: 4px 0 8px; }
+    audio { width: 100%; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Голос Клавы: выбери кандидата</h1>
+  <p class="phrase" id="phrase">загружаю…</p>
+  <div id="list"></div>
+</main>
+<script>
+  fetch('./voices/candidates.json', { cache: 'no-store' }).then((r) => r.json()).then((data) => {
+    document.getElementById('phrase').textContent = `Фраза: «${data.text}»`;
+    const list = document.getElementById('list');
+    for (const [i, c] of data.candidates.entries()) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<div class="head"><span>Вариант ${i + 1}</span>
+        <span class="meta">тон ${c.f0_hz} Гц · ${c.duration_s} с · синтез ×${c.rtf}</span></div>
+        <div class="desc"></div><audio controls preload="none"></audio>`;
+      card.querySelector('.desc').textContent = c.instruct;
+      card.querySelector('audio').src = `./voices/${c.file}`;
+      list.append(card);
+    }
+  }).catch((e) => { document.getElementById('phrase').textContent = `кандидатов пока нет: ${e}`; });
+</script>
+</body>
+</html>

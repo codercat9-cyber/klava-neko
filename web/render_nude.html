@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Рендер голой тушки Клавы для Насти</title>
+  <style>
+    body { margin: 0; background: #fff; overflow: hidden; }
+    canvas { display: block; width: 100vw; height: 100vh; }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./node_modules/three/build/three.module.js",
+        "three/addons/": "./node_modules/three/examples/jsm/",
+        "@pixiv/three-vrm": "./node_modules/@pixiv/three-vrm/lib/three-vrm.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="log" style="position:fixed;top:10px;left:10px;color:black;font-family:sans-serif;font-size:16px;z-index:999;">Загрузка...</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
+import { createFigure } from './figure.js';
+import { createBodyPaint } from './bodypaint.js';
+
+function setStatus(msg) {
+  console.log('[RENDER]', msg);
+  document.getElementById('log').textContent = msg;
+}
+
+async function postImage(filename, dataUrl, isDone = false) {
+  await fetch('http://127.0.0.1:9876/save_shot', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ filename, image: dataUrl, done: isDone })
+  });
+}
+
+async function run() {
+  try {
+    setStatus('Инициализация Three.js...');
+    const canvas = document.getElementById('c');
+    const width = 1600;
+    const height = 2400;
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, preserveDrawingBuffer: true });
+    renderer.setSize(width, height, false);
+    renderer.setPixelRatio(1);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf6f7f9); // Очень чистый мягкий студийный светлый фон
+
+    const camera = new THREE.PerspectiveCamera(24, width / height, 0.1, 20);
+
+    // Равномерный студийный свет
+    const amb = new THREE.AmbientLight(0xffffff, 1.4);
+    scene.add(amb);
+    const sunFront = new THREE.DirectionalLight(0xffffff, 1.6);
+    sunFront.position.set(0.5, 2.0, 3.0);
+    scene.add(sunFront);
+    const sunSide = new THREE.DirectionalLight(0xfff8ee, 0.9);
+    sunSide.position.set(-2.5, 1.5, 1.5);
+    scene.add(sunSide);
+    const sunBack = new THREE.DirectionalLight(0xeef4ff, 1.1);
+    sunBack.position.set(0, 2.0, -3.0);
+    scene.add(sunBack);
+
+    setStatus('Загрузка config.json...');
+    const cfgRes = await fetch('./config.json');
+    const cfg = await cfgRes.json();
+
+    setStatus('Загрузка Vita.vrm...');
+    const loader = new GLTFLoader();
+    loader.register((parser) => new VRMLoaderPlugin(parser));
+
+    const gltf = await loader.loadAsync('./assets/Vita.vrm');
+    const vrm = gltf.userData.vrm;
+    VRMUtils.rotateVRM0(vrm);
+    scene.add(vrm.scene);
+
+    setStatus('Применение пропорций фигуры Клавы...');
+    createFigure(vrm).apply(cfg);
+
+    const bust = cfg.bust ?? { scale: [1, 1, 1], shift: [0, 0, 0] };
+    for (const [n, side] of [['J_Sec_L_Bust1', 1], ['J_Sec_R_Bust1', -1]]) {
+      const b = vrm.scene.getObjectByName(n);
+      if (!b) continue;
+      b.scale.set(...(bust.scale ?? [1, 1, 1]));
+      b.position.x += (bust.shift?.[0] ?? 0) * side;
+      b.position.y += bust.shift?.[1] ?? 0;
+      b.position.z += bust.shift?.[2] ?? 0;
+    }
+    vrm.scene.updateMatrixWorld(true);
+    vrm.springBoneManager?.setInitState();
+
+    // Волосы: серебро подкрашиваем в hairTint, чисто синие пряди — в hairAccent
+    const tint = new THREE.Color(...(cfg.hairTint ?? [1, 1, 1]));
+    const accent = new THREE.Color(...(cfg.hairAccent ?? [0.36, 0.62, 1]));
+    vrm.scene.traverse((o) => {
+      if (!o.isMesh) return;
+      for (const m of [].concat(o.material)) {
+        if (!/hair/i.test(m?.name || '') || !m.color) continue;
+        const c = m.color;
+        const saturatedBlue = c.b > 0.6 && c.r < 0.25 && c.g < 0.35;
+        if (saturatedBlue) { c.copy(accent); m.shadeColorFactor?.copy(accent).multiplyScalar(0.7); }
+        else { c.multiply(tint); m.shadeColorFactor?.multiply(tint); }
+      }
+    });
+
+    setStatus('Скрытие одежды и кибер-деталей...');
+    // Все меши одежды
+    const hideList = new Set([
+      ...(cfg.hideMeshes || []),
+      'Bodybaked_4', // Топ одежды
+      'Bodybaked_5', // Обувь
+      'Hair001baked_52', 'Hair001baked_64', 'Hair001baked_51', 'Hair001baked_56'
+    ]);
+
+    vrm.scene.traverse((o) => {
+      if (hideList.has(o.name)) {
+        o.visible = false;
+      }
+      if (o.isMesh) {
+        for (const m of [].concat(o.material)) {
+          if (!m) continue;
+          if (/CLOTH|Shoes/i.test(m.name)) {
+            o.visible = false;
+          }
+        }
+      }
+    });
+
+    setStatus('Превращение нарисованного костюма в чистую кожу...');
+    const texLoader = new THREE.TextureLoader();
+    const cleanSkinTex = await texLoader.loadAsync('./assets/clean_nude_skin.png');
+    cleanSkinTex.colorSpace = THREE.SRGBColorSpace;
+
+    vrm.scene.traverse((o) => {
+      if (!o.isMesh) return;
+      for (const m of [].concat(o.material)) {
+        if (!m || !/Body.*SKIN/i.test(m.name)) continue;
+        if (m.map) cleanSkinTex.flipY = m.map.flipY;
+        m.map = cleanSkinTex;
+        if ('shadeMultiplyTexture' in m) {
+          m.shadeMultiplyTexture = cleanSkinTex;
+        }
+        m.needsUpdate = true;
+      }
+    });
+
+    setStatus('Установка позы (прямо, руки слегка разведены)...');
+    vrm.humanoid.resetNormalizedPose();
+    const N = (n) => vrm.humanoid.getNormalizedBoneNode(n);
+    // Спокойная прямая стойка анфас, руки слегка опущены вдоль тела (комфортный угол для эскиза одежды)
+    if (N('leftUpperArm')) N('leftUpperArm').rotation.set(0, 0, 1.22);
+    if (N('rightUpperArm')) N('rightUpperArm').rotation.set(0, 0, -1.22);
+    if (N('leftLowerArm')) N('leftLowerArm').rotation.set(0, 0.15, 0);
+    if (N('rightLowerArm')) N('rightLowerArm').rotation.set(0, -0.15, 0);
+    if (N('leftHand')) N('leftHand').rotation.set(0, 0, 0);
+    if (N('rightHand')) N('rightHand').rotation.set(0, 0, 0);
+
+    // Ноги ровно
+    if (N('leftUpperLeg')) N('leftUpperLeg').rotation.set(0, 0, -0.02);
+    if (N('rightUpperLeg')) N('rightUpperLeg').rotation.set(0, 0, 0.02);
+
+    // Мимика нейтральная, спокойная, глаза открыты
+    if (vrm.expressionManager) {
+      for (const e of vrm.expressionManager.expressions) {
+        vrm.expressionManager.setValue(e.expressionName, 0);
+      }
+      vrm.expressionManager.setValue('neutral', 1);
+    }
+
+    vrm.update(0);
+
+    // Вычисляем границы тела в полный рост
+    const headNode = N('head');
+    const headPos = headNode ? headNode.getWorldPosition(new THREE.Vector3()) : new THREE.Vector3(0, 1.35, 0);
+    const footL = vrm.humanoid.getRawBoneNode('leftFoot');
+    const footR = vrm.humanoid.getRawBoneNode('rightFoot');
+    const footY = Math.min(
+      footL ? footL.getWorldPosition(new THREE.Vector3()).y : 0.08,
+      footR ? footR.getWorldPosition(new THREE.Vector3()).y : 0.08
+    ) - 0.08;
+
+    const topY = headPos.y + 0.22; // Макушка
+    const targetY = (topY + footY) / 2; // Центр кадра
+    const charHeight = topY - footY;
+
+    // Рассчитываем дистанцию камеры, чтобы Клава занимала ~85% высоты кадра
+    const fovRad = THREE.MathUtils.degToRad(camera.fov);
+    const dist = (charHeight / 2) / Math.tan(fovRad / 2) * 1.15;
+
+    console.log('Target Y:', targetY, 'Distance:', dist);
+
+    async function capture(angleName, posFunc) {
+      posFunc();
+      camera.lookAt(0, targetY, 0);
+      camera.updateProjectionMatrix();
+
+      // Прогрев рендера
+      for (let i = 0; i < 3; i++) {
+        vrm.update(1/60);
+        renderer.render(scene, camera);
+        await new Promise(r => setTimeout(r, 60));
+      }
+      return canvas.toDataURL('image/png');
+    }
+
+    setStatus('Рендерим Анфас (тушка_для_эскиза.png)...');
+    const imgFront = await capture('front', () => {
+      camera.position.set(0, targetY, dist);
+    });
+    await postImage('тушка_для_эскиза.png', imgFront, false);
+
+    setStatus('Рендерим Сбоку (тушка_вид_сбоку.png)...');
+    const imgSide = await capture('side', () => {
+      camera.position.set(dist, targetY, 0);
+    });
+    await postImage('тушка_вид_сбоку.png', imgSide, false);
+
+    setStatus('Рендерим Со спины (тушка_вид_сзади.png)...');
+    const imgBack = await capture('back', () => {
+      camera.position.set(0, targetY, -dist);
+    });
+    await postImage('тушка_вид_сзади.png', imgBack, false);
+
+    setStatus('Рендерим 3/4 ракурс (тушка_вид_3_четверти.png)...');
+    const img3Q = await capture('three_quarter', () => {
+      const d = dist * 0.7071;
+      camera.position.set(d, targetY, d);
+    });
+    await postImage('тушка_вид_3_четверти.png', img3Q, true);
+
+    setStatus('Готово! Все рендеры переданы.');
+  } catch (err) {
+    setStatus('ОШИБКА: ' + String(err && err.stack ? err.stack : err));
+    console.error(err);
+    await fetch('http://127.0.0.1:9876/save_shot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename: 'error.txt', image: 'data:text/plain;base64,' + btoa(String(err && err.stack ? err.stack : err)), done: true })
+    }).catch(() => {});
+  }
+}
+
+run();
+</script>
+</body>
+</html>

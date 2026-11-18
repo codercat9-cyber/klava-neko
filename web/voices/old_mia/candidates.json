@@ -1,0 +1,71 @@
+{
+ "text": "Приветик! Я Мия, твоя кошечка-помощница. Мур-мур! Я так рада тебя видеть. Давай сегодня сделаем что-нибудь классное, а?",
+ "candidates": [
+  {
+   "file": "mia_01.wav",
+   "instruct": "Cute, sweet young anime girl voice, high-pitched and bright, playful and cheerful, with lively expressive intonation, like a catgirl character.",
+   "seed": 11,
+   "sr": 24000,
+   "duration_s": 7.76,
+   "gen_s": 62.16,
+   "rtf": 8.01,
+   "f0_hz": 494.9,
+   "peak_vram_gib": 4.12
+  },
+  {
+   "file": "mia_02.wav",
+   "instruct": "Soft, gentle and adorable young female voice, slightly breathy and airy, warm and affectionate, with playful rising intonations.",
+   "seed": 22,
+   "sr": 24000,
+   "duration_s": 11.28,
+   "gen_s": 88.3,
+   "rtf": 7.83,
+   "f0_hz": 393.4,
+   "peak_vram_gib": 4.23
+  },
+  {
+   "file": "mia_03.wav",
+   "instruct": "Energetic, bubbly anime heroine voice, high and clear, bouncy rhythm, smiling while speaking, very expressive and emotional.",
+   "seed": 33,
+   "sr": 24000,
+   "duration_s": 10.32,
+   "gen_s": 78.86,
+   "rtf": 7.64,
+   "f0_hz": 500.0,
+   "peak_vram_gib": 4.2
+  },
+  {
+   "file": "mia_04.wav",
+   "instruct": "Kawaii teenage girl voice, sweet and a little shy, soft timbre, playful and teasing tone, gentle giggles in the voice.",
+   "seed": 44,
+   "sr": 24000,
+   "duration_s": 11.44,
+   "gen_s": 86.68,
+   "rtf": 7.58,
+   "f0_hz": 436.4,
+   "peak_vram_gib": 4.23
+  },
+  {
+   "file": "mia_05.wav",
+   "instruct": "可爱甜美的少女声音，音调偏高，活泼俏皮，语气生动，像动漫里的猫娘。",
+   "seed": 55,
+   "sr": 24000,
+   "duration_s": 11.52,
+   "gen_s": 86.74,
+   "rtf": 7.53,
+   "f0_hz": 500.0,
+   "peak_vram_gib": 4.23
+  },
+  {
+   "file": "mia_06.wav",
+   "instruct": "Cheerful catgirl voice: bright, sweet, youthful female voice with a soft purring warmth, animated and full of emotion, natural and not robotic.",
+   "seed": 66,
+   "sr": 24000,
+   "duration_s": 10.8,
+   "gen_s": 81.71,
+   "rtf": 7.57,
+   "f0_hz": 428.6,
+   "peak_vram_gib": 4.21
+  }
+ ]
+}

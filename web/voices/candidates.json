@@ -1,0 +1,71 @@
+{
+ "text": "Приветик! Я Клава, твоя кошечка. Мур-мур! Как же я рада тебя видеть. Давай сегодня сделаем что-нибудь классное, а?",
+ "candidates": [
+  {
+   "file": "klava_01.wav",
+   "instruct": "Sweet, gentle young woman in her early twenties, soft and warm mid-high voice, cute and playful like a friendly anime catgirl, but clearly an adult, not a child. Clear, natural speech.",
+   "seed": 101,
+   "sr": 24000,
+   "duration_s": 13.36,
+   "gen_s": 108.24,
+   "rtf": 8.1,
+   "f0_hz": 393.4,
+   "peak_vram_gib": 4.28
+  },
+  {
+   "file": "klava_02.wav",
+   "instruct": "Warm, soothing female voice of a twenty-three-year-old woman, a gentle smile in the voice, slightly breathy, tender and affectionate, cute but grown-up, medium pitch.",
+   "seed": 202,
+   "sr": 24000,
+   "duration_s": 9.92,
+   "gen_s": 78.62,
+   "rtf": 7.93,
+   "f0_hz": 315.8,
+   "peak_vram_gib": 4.18
+  },
+  {
+   "file": "klava_03.wav",
+   "instruct": "Cheerful kawaii young woman, bright and melodic voice of medium pitch, playful teasing intonation, confident and friendly, adult anime heroine, not high-pitched.",
+   "seed": 303,
+   "sr": 24000,
+   "duration_s": 9.84,
+   "gen_s": 78.61,
+   "rtf": 7.99,
+   "f0_hz": 338.0,
+   "peak_vram_gib": 4.18
+  },
+  {
+   "file": "klava_04.wav",
+   "instruct": "Soft, velvety and cute young adult female voice, calm and cozy, a little purring and relaxed, like a cat girl lounging on a sofa, lower-mid pitch, very pleasant.",
+   "seed": 404,
+   "sr": 24000,
+   "duration_s": 11.12,
+   "gen_s": 88.36,
+   "rtf": 7.95,
+   "f0_hz": 317.9,
+   "peak_vram_gib": 4.22
+  },
+  {
+   "file": "klava_05.wav",
+   "instruct": "温柔甜美的年轻女性声音，二十多岁，音调中等，可爱但成熟，不像小孩，语气亲切活泼，像动漫里的猫娘姐姐。",
+   "seed": 505,
+   "sr": 24000,
+   "duration_s": 12.24,
+   "gen_s": 99.29,
+   "rtf": 8.11,
+   "f0_hz": 436.4,
+   "peak_vram_gib": 4.25
+  },
+  {
+   "file": "klava_06.wav",
+   "instruct": "Charming young woman, sweet voice with a light husky warmth, gentle and a bit flirty, kawaii but mature, relaxed natural pace, medium pitch.",
+   "seed": 606,
+   "sr": 24000,
+   "duration_s": 8.64,
+   "gen_s": 73.34,
+   "rtf": 8.49,
+   "f0_hz": 300.0,
+   "peak_vram_gib": 4.15
+  }
+ ]
+}
