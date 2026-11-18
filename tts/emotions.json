@@ -1,0 +1,183 @@
+{
+ "_": "Голос Клавы по эмоциям: ref — свой эталон (файл и его текст; сдвиг тона вокодером давал металл и «робота» — только исходные эталоны), instruct — эталон klava_02 плюс указание манеры: тембр и высота держатся лучше всего. loud_db — громкость речи фразы. 28.09 друг: эталоны из VoiceDesign уводили голос в высокий «лоляшный» тон, шёпот был не слышен — смех, грусть, хитрость, раздражение, шёпот переведены на манеру. Послушать: web/voices/emotions/emotions.html. После правки — POST /reload. xvec: true — эмоция обучена (emo_train, модель ...-ru-stress-emo): отпечаток klava_02 + манера, непотоково; манера должна дословно совпадать с обучающей (emo_train/prepare.py STYLES). laughs — живые смешки из tts/voices/laughs (tts/laugh_bank.py, выбор на web/voices/emotions/laughs/laughs.html) вместо «ха-ха» слогами. 28.09 вечер, друг: смех и плач «как ахегао», смех ненатуральный, иногда прорывается робот. Смешки VoiceDesign убраны из банка (придыхательные); радость и грусть — снова на живом эталоне (обученный режим «только отпечаток» беднее тембром), хитрость и смех — без протяжности и придыхания. Живые смех/плач/вздохи — tts/nonverbal (ASVP-ESD → Seed-VC в тембр Клавы). nonverbal — живые звуки её тембром (tts/nonverbal/convert.py: ASVP-ESD → Seed-VC), по умолчанию лучшие по тембру; выбор на web/voices/emotions/nonverbal/nonverbal.html. bank у стиля — какой звук перед фразой (bank_chance — как часто). 28.09 вечер: проба через сервер — «только отпечаток» беднее тембром (до 0,82, «робот»), LoRA поверх клона с эталоном держит 0,94–0,96; обученные стили переведены на lora:true (адаптер + эталон klava_02 + манера как при обучении). 28.09 20:10, друг: смех «обезьянье урчание», грусть глючит — звуки Seed-VC без тона (модель whisper-small, тон придумывает сама) смех и плач портят, банки пусты до лучшей конвертации; радость с LoRA уходила в 360–430 Гц и переговаривалась каждый раз — снова манерой. 28.09 21:30: адаптер v2 (RESD + смех внутри речи NonverbalTTS, метка 🤣) — [смех] говорит с ним, «ха-ха» → 🤣; прежний — models/emo_lora_v1. 28.09 21:55: смех по метке 🤣 адаптер не выучил (whisper: 0 из 12, «смеха не было» — друг); смех — живые смешки Seed-VC с тоном, которые whisper слышит как смех («Ха-ха-ха!», «Хе-хе-хе»), тембр 0,65+, до 3 с. 28.09 22:28, друг по номерам на слух: банши и ненатуральные (laugh_37, _00, _01, _04, _05, _07, _08, _11, _13, _18, _35, _39) выкинуты; в банке 10 одобренных. 28.09 22:40, друг выкинул на слух: плач cry_31/_26/_18/_12/_24/_15 (whisper слышит в них согласные «слова»: «НО! НО!», «О, гад!» — бормотание), вздохи sigh_30/_15/_13 (тембр < 0,69 и «Стоять.»); оставлены всхлипы на гласных. Паттерн для автоотбора: без согласных-слов в whisper, без «хм-хм» и смеха-пулемёта > 7 слогов, тембр ≥ 0,69. 28.09 22:50: ахегао — свой голос: комичная анимешная манера + её же голосом вставка «Ах, ямэро-о-о!», «Бака-бака!» (interjections, 70 %), стон из банка moan (50 %, когда друг выберет стоны). 28.09 23:00: друг дал референс «Yamete Kudasai» (Voicy) — tts/nonverbal/from_ref.py перевёл его в её тембр (0,84–0,93, тон 306–359 Гц): банки ahegao и moan = 3 лучших варианта; текстовые вставки «ямэро» выключены — друг: «озвучка текста, не живое».",
+ "calm": {
+  "loud_db": -21
+ },
+ "happy": {
+  "instruct": "Happy and cheerful, warm bright voice with a smile, lively intonation, clear words, natural medium pitch.",
+  "loud_db": -19.5
+ },
+ "laugh": {
+  "instruct": "Amused and cheerful, smiling voice with a light soft chuckle, clear words, her own natural young female voice and pitch.",
+  "loud_db": -19.5,
+  "bank": "laugh",
+  "bank_chance": 0.6
+ },
+ "angry": {
+  "instruct": "Furious and angry, shouting loudly, tense aggressive voice, yelling at someone.",
+  "loud_db": -17.5,
+  "lora": true
+ },
+ "annoyed": {
+  "instruct": "Irritated and grumpy, grumbling, annoyed sighs, clipped sharp words, her own natural young female voice and pitch.",
+  "loud_db": -20,
+  "lora": true
+ },
+ "sad": {
+  "instruct": "Sad and quiet, slow soft voice, a little shaky, clear words, her own natural young female voice and pitch.",
+  "loud_db": -22,
+  "lora": true
+ },
+ "surprised": {
+  "instruct": "Very surprised and shocked, gasping, amazed exclamations, same natural pitch.",
+  "loud_db": -19,
+  "bank": "gasp",
+  "bank_chance": 0.35,
+  "lora": true
+ },
+ "shy": {
+  "instruct": "Shy and embarrassed, soft hesitant voice, flustered little pauses, her own natural young female voice and pitch.",
+  "loud_db": -22
+ },
+ "tender": {
+  "ref": "tts/voices/emotions/tender_design_22.wav",
+  "text": "Мурр... иди сюда, мой хороший. Я так соскучилась. Давай просто посидим рядышком, ладно?",
+  "loud_db": -22.5
+ },
+ "sly": {
+  "instruct": "Teasing and playful, smirking, mischievous tone, clear words, natural relaxed medium pitch.",
+  "loud_db": -20.5,
+  "lora": true
+ },
+ "whisper": {
+  "instruct": "Soft breathy half-whisper, secretive and intimate, but every word clearly audible.",
+  "loud_db": -21,
+  "lora": true
+ },
+ "scared": {
+  "instruct": "Scared and anxious, trembling tense voice, nervous quick breaths.",
+  "loud_db": -21,
+  "lora": true
+ },
+ "cry": {
+  "instruct": "Crying softly while speaking, tearful shaky voice, sniffling between words, clear words, natural medium pitch.",
+  "loud_db": -22,
+  "bank": "cry",
+  "bank_chance": 0.7
+ },
+ "sigh": {
+  "instruct": "Tired and a little sad, slow calm voice after a deep sigh, clear words, her own natural young female voice and pitch.",
+  "loud_db": -22,
+  "bank": "sigh",
+  "bank_chance": 0.8
+ },
+ "moan": {
+  "instruct": "Soft languid pleased voice, slow and warm, relaxed, clear words, her own natural young female voice and pitch.",
+  "loud_db": -22,
+  "bank": "moan",
+  "bank_chance": 0.7
+ },
+ "sultry": {
+  "instruct": "Languid, sultry and velvety voice, slow and intimate, playful, clear words, her own natural young female voice and pitch.",
+  "loud_db": -21.5
+ },
+ "ahegao": {
+  "instruct": "Comedic flustered anime girl, playful exaggerated squeal and whine, teasing, bright and lively, clear words, natural medium pitch.",
+  "loud_db": -20,
+  "bank": "ahegao",
+  "bank_chance": 0.85,
+  "interjections": [
+   "Ах, ямэро-о-о!",
+   "Ня-а-а, ямэро!",
+   "Бака-бака-бака!",
+   "Мо-о, ямэро-о!",
+   "Ияа-а-а!",
+   "Уа-а, бака!"
+  ],
+  "interjection_chance": 0.0
+ },
+ "nonverbal": {
+  "laugh": [
+   "laugh_03.wav",
+   "laugh_10.wav",
+   "laugh_15.wav",
+   "laugh_21.wav",
+   "laugh_37.wav",
+   "laugh_00.wav",
+   "laugh_01.wav",
+   "laugh_04.wav",
+   "laugh_07.wav",
+   "laugh_08.wav",
+   "laugh_11.wav",
+   "laugh_13.wav",
+   "laugh_desk_17.wav",
+   "laugh_29.wav",
+   "laugh_35.wav",
+   "laugh_39.wav"
+  ],
+  "cry": [
+   "cry_30.wav",
+   "cry_desk_03.wav",
+   "cry_desk_04.wav",
+   "cry_desk_05.wav",
+   "cry_desk_06.wav",
+   "cry_desk_08.wav",
+   "cry_desk_10.wav",
+   "cry_23.wav",
+   "cry_desk_15.wav",
+   "cry_05.wav"
+  ],
+  "sigh": [
+   "sigh_17.wav",
+   "sigh_20.wav",
+   "sigh_21.wav",
+   "sigh_02.wav",
+   "sigh_08.wav",
+   "sigh_11.wav",
+   "sigh_14.wav",
+   "sigh_19.wav"
+  ],
+  "moan": [
+   "ahegao_02.wav",
+   "ahegao_00.wav",
+   "ahegao_01.wav"
+  ],
+  "groan": [],
+  "ahegao": [
+   "ahegao_02.wav",
+   "ahegao_00.wav",
+   "ahegao_01.wav"
+  ],
+  "squeal": [
+   "squeal_22.wav",
+   "squeal_07.wav",
+   "squeal_06.wav",
+   "squeal_17.wav",
+   "squeal_23.wav",
+   "squeal_18.wav",
+   "squeal_14.wav",
+   "squeal_11.wav",
+   "squeal_00.wav",
+   "squeal_21.wav"
+  ],
+  "gasp": [
+   "gasp_04.wav",
+   "gasp_27.wav",
+   "gasp_20.wav",
+   "gasp_19.wav"
+  ]
+ },
+ "excited": {
+  "instruct": "Happy and cheerful, warm bright voice with a smile, lively intonation, clear words, natural medium pitch.",
+  "loud_db": -19.5,
+  "bank": "squeal",
+  "bank_chance": 0.45
+ },
+ "vlad": {
+  "ref": "tts/voices/emotions/vlad_ref.wav",
+  "text": "Каталог документов за квартал лежит на кухне. Он звонит, чтобы повторить договор. Это красивее и вовремя. И это не капец, а просто охуенно.",
+  "min_f0": 60,
+  "max_f0": 200,
+  "loud_db": -18
+ }
+}

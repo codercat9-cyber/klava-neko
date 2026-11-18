@@ -1,0 +1,50 @@
+{
+ "angry": {
+  "bad": 0,
+  "severe": 0,
+  "n": 12,
+  "f0": 281
+ },
+ "annoyed": {
+  "bad": 0,
+  "severe": 0,
+  "n": 12,
+  "f0": 257
+ },
+ "whisper": {
+  "bad": 1,
+  "severe": 0,
+  "n": 12,
+  "f0": 268
+ },
+ "scared": {
+  "bad": 0,
+  "severe": 0,
+  "n": 12,
+  "f0": 278
+ },
+ "happy": {
+  "bad": 1,
+  "severe": 0,
+  "n": 12,
+  "f0": 276
+ },
+ "sly": {
+  "bad": 1,
+  "severe": 0,
+  "n": 12,
+  "f0": 267
+ },
+ "surprised": {
+  "bad": 0,
+  "severe": 0,
+  "n": 12,
+  "f0": 266
+ },
+ "sad": {
+  "bad": 1,
+  "severe": 0,
+  "n": 12,
+  "f0": 238
+ }
+}

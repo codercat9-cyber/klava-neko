@@ -1,0 +1,242 @@
+[
+ {
+  "kind": "giggle",
+  "seed": 1,
+  "file": "giggle_1.wav",
+  "dur_s": 3.46,
+  "sim": 0.456,
+  "breathy": 0.8,
+  "choppy": 0.88,
+  "gen_s": 6.6
+ },
+ {
+  "kind": "giggle",
+  "seed": 2,
+  "file": "giggle_2.wav",
+  "dur_s": 3.52,
+  "sim": 0.819,
+  "breathy": 0.74,
+  "choppy": 1.0,
+  "gen_s": 2.6
+ },
+ {
+  "kind": "giggle",
+  "seed": 3,
+  "file": "giggle_3.wav",
+  "dur_s": 2.49,
+  "sim": 0.575,
+  "breathy": 0.67,
+  "choppy": 0.73,
+  "gen_s": 2.0
+ },
+ {
+  "kind": "giggle",
+  "seed": 4,
+  "file": "giggle_4.wav",
+  "dur_s": 3.73,
+  "sim": 0.478,
+  "breathy": 0.66,
+  "choppy": 0.85,
+  "gen_s": 2.8
+ },
+ {
+  "kind": "giggle",
+  "seed": 5,
+  "file": "giggle_5.wav",
+  "dur_s": 7.21,
+  "sim": 0.746,
+  "breathy": 0.55,
+  "choppy": 0.75,
+  "gen_s": 4.9
+ },
+ {
+  "kind": "giggle",
+  "seed": 6,
+  "file": "giggle_6.wav",
+  "dur_s": 7.6,
+  "sim": 0.83,
+  "breathy": 0.45,
+  "choppy": 0.65,
+  "gen_s": 5.4
+ },
+ {
+  "kind": "chuckle",
+  "seed": 1,
+  "file": "chuckle_1.wav",
+  "dur_s": 4.06,
+  "sim": 0.269,
+  "breathy": 0.1,
+  "choppy": 0.43,
+  "gen_s": 3.2
+ },
+ {
+  "kind": "chuckle",
+  "seed": 2,
+  "file": "chuckle_2.wav",
+  "dur_s": 0.75,
+  "sim": 0.479,
+  "breathy": 0.45,
+  "choppy": 0.86,
+  "gen_s": 1.1
+ },
+ {
+  "kind": "chuckle",
+  "seed": 3,
+  "file": "chuckle_3.wav",
+  "dur_s": 1.11,
+  "sim": 0.232,
+  "breathy": 0.03,
+  "choppy": 0.38,
+  "gen_s": 1.2
+ },
+ {
+  "kind": "chuckle",
+  "seed": 4,
+  "file": "chuckle_4.wav",
+  "dur_s": 7.77,
+  "sim": 0.803,
+  "breathy": 0.49,
+  "choppy": 0.69,
+  "gen_s": 5.7
+ },
+ {
+  "kind": "chuckle",
+  "seed": 5,
+  "file": "chuckle_5.wav",
+  "dur_s": 0.89,
+  "sim": 0.193,
+  "breathy": 0.08,
+  "choppy": 0.65,
+  "gen_s": 1.1
+ },
+ {
+  "kind": "chuckle",
+  "seed": 6,
+  "file": "chuckle_6.wav",
+  "dur_s": 1.84,
+  "sim": 0.616,
+  "breathy": 0.76,
+  "choppy": 0.52,
+  "gen_s": 1.8
+ },
+ {
+  "kind": "laugh",
+  "seed": 1,
+  "file": "laugh_1.wav",
+  "dur_s": 3.64,
+  "sim": 0.455,
+  "breathy": 0.7,
+  "choppy": 0.49,
+  "gen_s": 2.9
+ },
+ {
+  "kind": "laugh",
+  "seed": 2,
+  "file": "laugh_2.wav",
+  "dur_s": 2.58,
+  "sim": 0.259,
+  "breathy": 0.67,
+  "choppy": 0.74,
+  "gen_s": 2.3
+ },
+ {
+  "kind": "laugh",
+  "seed": 3,
+  "file": "laugh_3.wav",
+  "dur_s": 8.7,
+  "sim": 0.647,
+  "breathy": 0.38,
+  "choppy": 0.59,
+  "gen_s": 6.6
+ },
+ {
+  "kind": "laugh",
+  "seed": 4,
+  "file": "laugh_4.wav",
+  "dur_s": 3.01,
+  "sim": 0.182,
+  "breathy": 0.98,
+  "choppy": 0.53,
+  "gen_s": 2.7
+ },
+ {
+  "kind": "laugh",
+  "seed": 5,
+  "file": "laugh_5.wav",
+  "dur_s": 2.8,
+  "sim": 0.794,
+  "breathy": 0.86,
+  "choppy": 0.54,
+  "gen_s": 2.4
+ },
+ {
+  "kind": "laugh",
+  "seed": 6,
+  "file": "laugh_6.wav",
+  "dur_s": 2.32,
+  "sim": 0.467,
+  "breathy": 0.83,
+  "choppy": 0.72,
+  "gen_s": 2.0
+ },
+ {
+  "kind": "cackle",
+  "seed": 1,
+  "file": "cackle_1.wav",
+  "dur_s": 10.23,
+  "sim": 0.598,
+  "breathy": 0.12,
+  "choppy": 0.51,
+  "gen_s": 7.4
+ },
+ {
+  "kind": "cackle",
+  "seed": 2,
+  "file": "cackle_2.wav",
+  "dur_s": 15.36,
+  "sim": 0.628,
+  "breathy": 0.23,
+  "choppy": 0.56,
+  "gen_s": 11.1
+ },
+ {
+  "kind": "cackle",
+  "seed": 3,
+  "file": "cackle_3.wav",
+  "dur_s": 24.79,
+  "sim": 0.63,
+  "breathy": 0.38,
+  "choppy": 0.89,
+  "gen_s": 18.1
+ },
+ {
+  "kind": "cackle",
+  "seed": 4,
+  "file": "cackle_4.wav",
+  "dur_s": 13.91,
+  "sim": 0.601,
+  "breathy": 0.15,
+  "choppy": 0.54,
+  "gen_s": 10.0
+ },
+ {
+  "kind": "cackle",
+  "seed": 5,
+  "file": "cackle_5.wav",
+  "dur_s": 5.1,
+  "sim": 0.303,
+  "breathy": 0.83,
+  "choppy": 0.27,
+  "gen_s": 4.0
+ },
+ {
+  "kind": "cackle",
+  "seed": 6,
+  "file": "cackle_6.wav",
+  "dur_s": 8.05,
+  "sim": 0.607,
+  "breathy": 0.37,
+  "choppy": 0.75,
+  "gen_s": 5.9
+ }
+]
