@@ -1,0 +1,66 @@
+# Модели и среды — их качают скрипты tools\*.ps1 (УСТАНОВИТЬ.bat)
+/models/
+/runtime/
+/tts/.venv/
+__pycache__/
+
+# Сборки
+/bin/
+/bin_*/
+/app/*/bin/
+/editor_bin/
+/pult_bin/
+obj/
+# Visual Studio / Rider: кэш и личные настройки решения Klava.sln
+.vs/
+.idea/
+*.user
+*.suo
+
+# Личное: история разговоров, журналы, голоса друзей, настройки с именами и выбранными мозгами
+/data/
+/klava.json
+/klava.json.*
+/workspace/
+/web/config.backups/
+# свой облик: её вещи из мастерской, сшитые наряды, правки редактора (в репозитории — web/config.default.json)
+/web/config.json
+/web/config.default.last.json
+/web/models/
+
+# Мост Minecraft ставится через npm install; у аватара node_modules ЛЕЖИТ в репозитории (three.js, three-vrm),
+# чтобы он шёл без Node
+/mineflayer_bridge/node_modules/
+
+# Кандидаты голоса, кроме эталона Клавы (tts/voice.json → klava_02.wav)
+/tts/voices/rejected/
+/tts/voices/old_mia/
+/tts/voices/candidates/klava_0[13-9].wav
+
+# Инструменты только для машины автора и батники публикации
+/tools/remove_old_models.ps1
+/ОТПРАВИТЬ_НА_GITHUB.bat
+/СОБРАТЬ_АРХИВ_ДРУЗЬЯМ.bat
+/ОТПРАВИТЬ_НА_GITHUB.ps1
+/СОБРАТЬ_АРХИВ_ДРУЗЬЯМ.ps1
+/README_UPDATE_CLAUDE.md
+
+# Игры: окружение, веса, записи игры друга (личное), чужие NitroGen/драйвер; Seed-VC; страницы прослушки эмоций
+/gamer/.venv/
+/gamer/models/
+/gamer/data/
+/gamer/logs/
+/gamer/nitrogen/
+/gamer/drivers/
+/tools/seed-vc/
+/web/voices/emotions/
+*.blend1
+
+# Мусор
+*.bak
+*.bak_*
+*.bak_before_*
+*.log
+*.pid
+*.part
+.claude/
