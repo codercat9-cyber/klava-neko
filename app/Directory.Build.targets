@@ -1,0 +1,38 @@
+<Project>
+
+  <!-- Пакет WebView2 для любого .NET 5+ безусловно подключает свою WPF-обёртку (Common.targets), а окна у нас
+       WinForms: без неё нет конфликта WindowsBase 4.0/5.0 (MSB3277). -->
+  <Target Name="DropWebView2Wpf" BeforeTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <Reference Remove="@(Reference)" Condition="'%(Filename)' == 'Microsoft.Web.WebView2.Wpf'" />
+    </ItemGroup>
+  </Target>
+
+  <!--
+    Release собирается как обычно (app\*\bin\Release\…) и сразу выкладывается туда, откуда запускается:
+    KlavaDesk → bin\, KlavaEditor → editor_bin\. Запущена из той папки — не трогаем (полуобновлённый bin хуже
+    старого: часть библиотек занята, часть уже новая) и только предупреждаем; сборка при этом успешна — проверка
+    компиляции работает и при живой Клаве (её агенты так проверяют свои правки). СОБРАТЬ_КЛАВУ.bat закрывает её сам.
+    Не выкладывается: Debug, сборка с -o (setup.ps1 и проверочные сборки и так кладут куда сказано), -p:KlavaDeploy=false.
+  -->
+  <Target Name="KlavaDeploy" AfterTargets="Build"
+          Condition="'$(Configuration)' == 'Release' and '$(KlavaDeployDir)' != '' and '$(KlavaDeploy)' != 'false' and '$(_CommandLineDefinedOutputPath)' != 'true' and '$(DesignTimeBuild)' != 'true'">
+    <Exec Command="powershell -NoProfile -NonInteractive -Command &quot;if (Get-Process -Name '$(AssemblyName)' -ErrorAction SilentlyContinue | Where-Object { $_.Path -and $_.Path.StartsWith('$(KlavaDeployDir)', 'OrdinalIgnoreCase') }) { exit 3 }&quot;"
+          IgnoreExitCode="true" EchoOff="true" StandardOutputImportance="low">
+      <Output TaskParameter="ExitCode" PropertyName="_KlavaBusy" />
+    </Exec>
+    <Warning Condition="'$(_KlavaBusy)' == '3'"
+             Text="$(AssemblyName) запущен из $(KlavaDeployDir) — туда не выкладываю, новая сборка лежит в $(TargetDir). Закрой (трей → Выход) и собери ещё раз или запусти СОБРАТЬ_КЛАВУ.bat: он закроет, соберёт и запустит снова." />
+    <ItemGroup Condition="'$(_KlavaBusy)' != '3'">
+      <_KlavaDeployFile Include="$(TargetDir)**\*" />
+    </ItemGroup>
+    <Copy Condition="'$(_KlavaBusy)' != '3'" SourceFiles="@(_KlavaDeployFile)"
+          DestinationFiles="@(_KlavaDeployFile->'$(KlavaDeployDir)%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" Retries="3" RetryDelayMilliseconds="500">
+      <Output TaskParameter="CopiedFiles" ItemName="_KlavaDeployed" />
+    </Copy>
+    <Message Condition="'$(_KlavaBusy)' != '3'" Importance="high"
+             Text="$(AssemblyName) → $(KlavaDeployDir) (обновлено файлов: @(_KlavaDeployed->Count()))" />
+  </Target>
+
+</Project>

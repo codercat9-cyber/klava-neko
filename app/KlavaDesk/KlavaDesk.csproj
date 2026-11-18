@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- net9: NAudio 3.x собран только под .NET 9; 10.0.19041 — доступ к WinRT (Windows.Media.Ocr для глаз) -->
+    <!-- SDK 22621 — ради API Windows 11 (захват окна игры без жёлтой рамки); работает по-прежнему с Windows 10 2004: вызовы новее — под проверкой версии -->
+    <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>klava.ico</ApplicationIcon>
+    <UseWindowsForms>true</UseWindowsForms>
+    <!-- UseWPF — только ради System.Windows.Automation (UI Automation: клик по кнопке по имени, адрес вкладки браузера) -->
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>KlavaDesk</AssemblyName>
+    <RootNamespace>KlavaDesk</RootNamespace>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <!-- с UseWPF SDK убирает эти неявные using (конфликт имён в WPF) — нам они нужны -->
+  <ItemGroup>
+    <Using Include="System.IO" />
+    <Using Include="System.Net.Http" />
+  </ItemGroup>
+
+  <!-- версии — в app\Directory.Packages.props -->
+  <ItemGroup>
+    <PackageReference Include="MeltySynth" />
+    <PackageReference Include="Microsoft.Web.WebView2" />
+    <PackageReference Include="NAudio" />
+    <!-- лёгкий комплект слуха и голоса (GigaAM, Supertonic, CAM++, Silero VAD) на ONNX Runtime — без Python и видеокарты -->
+    <PackageReference Include="org.k2fsa.sherpa.onnx" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- sherpa-onnx тянет нативные библиотеки под все платформы — оставляем только Windows x64 -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+</Project>

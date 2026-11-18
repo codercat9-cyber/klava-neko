@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>KlavaEditor</AssemblyName>
+    <RootNamespace>KlavaEditor</RootNamespace>
+    <ApplicationIcon>..\KlavaDesk\klava.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- версия — в app\Directory.Packages.props, та же, что у KlavaDesk -->
+    <PackageReference Include="Microsoft.Web.WebView2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- скрипт Blender для примерки (ключ swap): .blend → VRM 0.x через аддон «VRM format» -->
+    <None Include="blender\export_vrm.py" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

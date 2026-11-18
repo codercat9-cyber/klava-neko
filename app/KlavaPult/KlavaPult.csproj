@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Пульт Клавы: запуск/выключение, службы, мозги и квоты AG Tools, команды текстом, сборка, пакет и пуш на GitHub.
+       Живой Клавой рулит её же командами KlavaDesk.exe (say, quit, mute, brains, audio, terminal), выключенной —
+       командой set. Собирается вместе с Klava.sln, Release выкладывается в pult_bin\ (Directory.Build.props/targets). -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>KlavaPult</AssemblyName>
+    <RootNamespace>KlavaPult</RootNamespace>
+    <ApplicationIcon>..\KlavaDesk\klava.ico</ApplicationIcon>
+    <!-- WFO1000 — сериализация свойств для дизайнера форм; дизайнера нет, всё собирается кодом -->
+    <NoWarn>$(NoWarn);WFO1000</NoWarn>
+  </PropertyGroup>
+
+</Project>

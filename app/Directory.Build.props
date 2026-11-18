@@ -1,0 +1,22 @@
+<Project>
+
+  <!-- Общее для обоих приложений Klava.sln (KlavaDesk и редактор аватара KlavaEditor). Подключается само: MSBuild
+       ищет Directory.Build.props вверх от папки проекта. Версии пакетов — в Directory.Packages.props, раскладка сборки
+       по папкам запуска (bin, editor_bin) — в Directory.Build.targets. -->
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <SatelliteResourceLanguages>ru;en</SatelliteResourceLanguages>
+    <!-- корень Клавы (H:\Neiro\Neko или куда её поставили): там klava.json, bin, editor_bin -->
+    <KlavaRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))\</KlavaRoot>
+  </PropertyGroup>
+
+  <!-- куда Release выкладывается для запуска: ярлык «Клава» и START_KLAVA.bat берут bin\KlavaDesk.exe -->
+  <PropertyGroup>
+    <KlavaDeployDir Condition="'$(MSBuildProjectName)' == 'KlavaDesk'">$(KlavaRoot)bin\</KlavaDeployDir>
+    <KlavaDeployDir Condition="'$(MSBuildProjectName)' == 'KlavaEditor'">$(KlavaRoot)editor_bin\</KlavaDeployDir>
+    <KlavaDeployDir Condition="'$(MSBuildProjectName)' == 'KlavaPult'">$(KlavaRoot)pult_bin\</KlavaDeployDir>
+  </PropertyGroup>
+
+</Project>

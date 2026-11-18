@@ -1,0 +1,129 @@
+{
+  "model": "./assets/Vita.vrm",
+  "hairTint": [
+    0.8,
+    0.9,
+    1
+  ],
+  "hairAccent": [
+    0.36,
+    0.62,
+    1
+  ],
+  "hideMeshes": [
+    "Hair001baked_52",
+    "Hair001baked_64",
+    "Hair001baked_51",
+    "Hair001baked_56"
+  ],
+  "ears": {
+    "outer": [
+      0.42,
+      0.64,
+      1
+    ],
+    "inner": [
+      1,
+      0.84,
+      0.92
+    ],
+    "tuft": [
+      1,
+      0.98,
+      1
+    ],
+    "size": 1.3,
+    "offset": [
+      0.07,
+      0.17,
+      -0.02
+    ],
+    "tilt": [
+      -0.12,
+      0.25,
+      -0.32
+    ]
+  },
+  "cameraFov": 26,
+  "cameraDistance": 1.25,
+  "cameraDistanceMin": 0.8,
+  "maskCell": 4,
+  "maskIntervalMs": 150,
+  "kimono": {
+    "enabled": true,
+    "bodyMesh": "Bodybaked",
+    "hideMeshes": [
+      "Bodybaked_4"
+    ],
+    "hemAboveFoot": 0.03,
+    "slitW": 0.11,
+    "top": [
+      0.07,
+      0.16,
+      0.62
+    ],
+    "hem": [
+      0.008,
+      0.012,
+      0.08
+    ],
+    "wave": [
+      0.55,
+      0.72,
+      1
+    ],
+    "collar": [
+      0.01,
+      0.015,
+      0.09
+    ],
+    "gold": [
+      1,
+      0.8,
+      0.35
+    ],
+    "eri": [
+      0.98,
+      0.98,
+      1
+    ],
+    "juban": [
+      1,
+      0.86,
+      0.9
+    ],
+    "obi": [
+      0.94,
+      0.94,
+      1
+    ],
+    "cord": [
+      1,
+      0.45,
+      0.65
+    ],
+    "petal": [
+      1,
+      0.93,
+      0.96
+    ],
+    "petalDeep": [
+      1.0,
+      0.38,
+      0.55
+    ]
+  },
+  "cameraStart": "full",
+  "bust": {
+    "scale": [
+      0.95,
+      1.12,
+      1.5
+    ],
+    "shift": [
+      0.007,
+      0.004,
+      0
+    ]
+  }
+}

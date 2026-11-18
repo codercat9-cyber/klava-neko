@@ -1,0 +1,20 @@
+<Project>
+
+  <!-- Версии NuGet-пакетов — одни на оба приложения (Central Package Management): в .csproj только имена.
+       WebView2 у KlavaDesk и редактора обязан совпадать — один рантайм окна на машине. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- синтезатор MIDI (её музыка, скрипка) -->
+    <PackageVersion Include="MeltySynth" Version="2.4.1" />
+    <!-- окно аватара (three.js, VRM); 1.0.4129.50 лежит в кэше NuGet этой машины -->
+    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.4129.50" />
+    <!-- микрофон, колонки, захват звука процесса (видео); NAudio 3.x собран только под .NET 9 -->
+    <PackageVersion Include="NAudio" Version="3.1.0" />
+    <!-- лёгкий комплект слуха и голоса (GigaAM, Supertonic, CAM++, Silero VAD) на ONNX Runtime -->
+    <PackageVersion Include="org.k2fsa.sherpa.onnx" Version="1.13.8" />
+  </ItemGroup>
+
+</Project>
